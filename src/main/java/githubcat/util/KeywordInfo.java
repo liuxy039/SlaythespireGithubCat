@@ -1,4 +1,4 @@
-package basicmod.util;
+package githubcat.util;
 
 import basemod.helpers.KeywordColorInfo;
 

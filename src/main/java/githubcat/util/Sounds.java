@@ -1,6 +1,6 @@
-package basicmod.util;
+package githubcat.util;
 
-import static basicmod.BasicMod.audioPath;
+import static githubcat.BasicMod.audioPath;
 
 public class Sounds {
     public static String TEST_SOUND = audioPath("test.wav"); //Load audio using a given path

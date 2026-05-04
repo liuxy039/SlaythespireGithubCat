@@ -1,18 +1,14 @@
-package basicmod.character;
+package githubcat.character;
 
 import basemod.BaseMod;
 import basemod.abstracts.CustomEnergyOrb;
 import basemod.abstracts.CustomPlayer;
-import basemod.animations.SpriterAnimation;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.blue.Defend_Blue;
-import com.megacrit.cardcrawl.cards.green.Neutralize;
-import com.megacrit.cardcrawl.cards.red.Strike_Red;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
@@ -25,8 +21,8 @@ import com.megacrit.cardcrawl.screens.CharSelectInfo;
 
 import java.util.ArrayList;
 
-import static basicmod.BasicMod.characterPath;
-import static basicmod.BasicMod.makeID;
+import static githubcat.BasicMod.characterPath;
+import static githubcat.BasicMod.makeID;
 
 public class MyCharacter extends CustomPlayer {
     //Stats
@@ -85,9 +81,9 @@ public class MyCharacter extends CustomPlayer {
 
 
     //In-game images
-    private static final String SHOULDER_1 = characterPath("shoulder.png"); //Shoulder 1 and 2 are used at rest sites.
+    private static final String SHOULDER_1 = characterPath("shoulder.png");
     private static final String SHOULDER_2 = characterPath("shoulder2.png");
-    private static final String CORPSE = characterPath("corpse.png"); //Corpse is when you die.
+    private static final String CORPSE = characterPath("corpse.png");
 
     //Textures used for the energy orb
     private static final String[] orbTextures = {
@@ -116,10 +112,27 @@ public class MyCharacter extends CustomPlayer {
 
     //Actual character class code below this point
 
+    public StaticTextureAnimation poseAnimation;
+
+    public void setPose(int index) {
+        if (poseAnimation != null) {
+            poseAnimation.setPose(index);
+        }
+    }
+
+    public int getPose() {
+        if (poseAnimation != null) {
+            return poseAnimation.getCurrentIndex();
+        }
+        return 0;
+    }
+
     public MyCharacter() {
         super(getNames()[0], Meta.YOUR_CHARACTER,
                 new CustomEnergyOrb(orbTextures, characterPath("energyorb/vfx.png"), layerSpeeds), //Energy Orb
-                new SpriterAnimation(characterPath("animation/default.scml"))); //Animation
+                new StaticTextureAnimation()); //Animated standing pose
+
+        poseAnimation = (StaticTextureAnimation) this.animation;
 
         initializeClass(null,
                 SHOULDER_2,
@@ -137,13 +150,11 @@ public class MyCharacter extends CustomPlayer {
     @Override
     public ArrayList<String> getStartingDeck() {
         ArrayList<String> retVal = new ArrayList<>();
-        //List of IDs of cards for your starting deck.
-        //If you want multiple of the same card, you have to add it multiple times.
-        retVal.add(Strike_Red.ID);
-        retVal.add(Strike_Red.ID);
-        retVal.add(Defend_Blue.ID);
-        retVal.add(Defend_Blue.ID);
-        retVal.add(Neutralize.ID);
+        retVal.add(githubcat.cards.Strike.ID);
+        retVal.add(githubcat.cards.Strike.ID);
+        retVal.add(githubcat.cards.Strike.ID);
+        retVal.add(githubcat.cards.Defend.ID);
+        retVal.add(githubcat.cards.Defend.ID);
 
         return retVal;
     }
@@ -151,7 +162,6 @@ public class MyCharacter extends CustomPlayer {
     @Override
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        //IDs of starting relics. You can have multiple, but one is recommended.
         retVal.add(BurningBlood.ID);
 
         return retVal;
@@ -159,9 +169,7 @@ public class MyCharacter extends CustomPlayer {
 
     @Override
     public AbstractCard getStartCardForEvent() {
-        //This card is used for the Gremlin card matching game.
-        //It should be a non-strike non-defend starter card, but it doesn't have to be.
-        return new Strike_Red();
+        return new githubcat.cards.Strike();
     }
 
     /*- Below this is methods that you should *probably* adjust, but don't have to. -*/

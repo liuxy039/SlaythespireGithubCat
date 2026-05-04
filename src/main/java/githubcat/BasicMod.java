@@ -1,12 +1,12 @@
-package basicmod;
+package githubcat;
 
 import basemod.BaseMod;
 import basemod.interfaces.*;
-import basicmod.character.MyCharacter;
-import basicmod.util.GeneralUtils;
-import basicmod.util.KeywordInfo;
-import basicmod.util.Sounds;
-import basicmod.util.TextureLoader;
+import githubcat.character.MyCharacter;
+import githubcat.util.GeneralUtils;
+import githubcat.util.KeywordInfo;
+import githubcat.util.Sounds;
+import githubcat.util.TextureLoader;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglFileHandle;
@@ -35,7 +35,8 @@ public class BasicMod implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         AddAudioSubscriber,
-        PostInitializeSubscriber {
+        PostInitializeSubscriber,
+        basemod.interfaces.EditCardsSubscriber {
     public static ModInfo info;
     public static String modID; //Edit your pom.xml to change this
     static { loadModInfo(); }
@@ -162,6 +163,12 @@ public class BasicMod implements
     @Override
     public void receiveEditCharacters() {
         MyCharacter.Meta.registerCharacter();
+    }
+
+    @Override
+    public void receiveEditCards() {
+        BaseMod.addCard(new githubcat.cards.Strike());
+        BaseMod.addCard(new githubcat.cards.Defend());
     }
 
     @Override
