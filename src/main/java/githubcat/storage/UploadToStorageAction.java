@@ -6,10 +6,9 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import githubcat.patches.StorageRenderPatch;
 
-import java.util.ArrayList;
-
 public class UploadToStorageAction extends AbstractGameAction {
     private boolean waitingForSelection = true;
+    private boolean opened = false;
 
     public UploadToStorageAction() {
         this.duration = Settings.ACTION_DUR_FAST;
@@ -22,7 +21,7 @@ public class UploadToStorageAction extends AbstractGameAction {
             return;
         }
 
-        if (AbstractDungeon.player.hand.size() == 0) {
+        if (AbstractDungeon.player == null || AbstractDungeon.player.hand.size() == 0) {
             isDone = true;
             return;
         }
@@ -32,26 +31,23 @@ public class UploadToStorageAction extends AbstractGameAction {
                 StorageRenderPatch.storageUI.addCard(c);
             }
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
-            AbstractDungeon.closeCurrentScreen();
+            if (AbstractDungeon.isScreenUp) {
+                AbstractDungeon.closeCurrentScreen();
+            }
             waitingForSelection = false;
             isDone = true;
             return;
         }
 
-        if (!AbstractDungeon.isScreenUp) {
+        if (!opened) {
             AbstractDungeon.gridSelectScreen.open(
                     AbstractDungeon.player.hand,
                     3,
                     true,
                     "选择要上传到仓库的卡牌"
             );
-            for (AbstractCard c : AbstractDungeon.player.hand.group) {
-                c.stopGlowing();
-            }
-        } else {
-            for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
-                c.beginGlowing();
-            }
+            AbstractDungeon.gridSelectScreen.selectedCards.clear();
+            opened = true;
         }
     }
 }

@@ -2,15 +2,12 @@ package githubcat.cards;
 
 import githubcat.util.CardStats;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import githubcat.patches.StorageRenderPatch;
-
-import java.util.ArrayList;
 
 import static githubcat.character.MyCharacter.Meta.CARD_COLOR;
 
@@ -32,10 +29,6 @@ public class PushToCloud extends BaseCard {
         int count = magicNumber;
         if (AbstractDungeon.player.hand.size() == 0) return;
 
-        for (AbstractCard c : AbstractDungeon.player.hand.group) {
-            c.stopGlowing();
-        }
-
         used = false;
         AbstractDungeon.gridSelectScreen.selectedCards.clear();
         AbstractDungeon.gridSelectScreen.open(
@@ -51,6 +44,18 @@ public class PushToCloud extends BaseCard {
         super.update();
         if (used) return;
         if (StorageRenderPatch.storageUI == null) return;
+
+        if (AbstractDungeon.isScreenUp && AbstractDungeon.screen == AbstractDungeon.CurrentScreen.GRID) {
+            for (AbstractCard c : AbstractDungeon.player.hand.group) {
+                if (AbstractDungeon.gridSelectScreen.selectedCards.contains(c)) {
+                    c.beginGlowing();
+                    c.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+                } else {
+                    c.stopGlowing();
+                }
+            }
+        }
+
         if (AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) return;
 
         for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {

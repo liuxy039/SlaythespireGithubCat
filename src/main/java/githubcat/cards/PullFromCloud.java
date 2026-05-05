@@ -37,6 +37,7 @@ public class PullFromCloud extends CustomCard {
             if (toHand.costForTurn < 0) toHand.costForTurn = 0;
         }
         addToBot(new MakeTempCardInHandAction(toHand, 1));
+        githubcat.storage.StorageUI.onCardAddedToHand(toHand);
     }
 
     @Override

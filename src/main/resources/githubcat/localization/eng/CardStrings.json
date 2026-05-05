@@ -27,95 +27,6 @@
     "DESCRIPTION": "获得 !B! 点格挡。造成 !D! 点伤害 2 次。",
     "UPGRADE_DESCRIPTION": "获得 !B! 点格挡。造成 !D! 点伤害 2 次。"
   },
-  "${modID}:TestStrike": {
-    "NAME": "测试打击",
-    "DESCRIPTION": "造成 !D! 点伤害。"
-  },
-  "${modID}:TestBlock": {
-    "NAME": "测试防御",
-    "DESCRIPTION": "获得 !B! 点格挡。"
-  },
-  "${modID}:TestDraw": {
-    "NAME": "测试抽牌",
-    "DESCRIPTION": "失去 1 点生命。抽 !M! 张牌。"
-  },
-  "${modID}:TestSelfHarm": {
-    "NAME": "测试自残",
-    "DESCRIPTION": "造成 !D! 点伤害。自己受到造成伤害的一半的伤害。",
-    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。自己受到造成伤害的四分之一的伤害。"
-  },
-  "${modID}:TestIntangible": {
-    "NAME": "测试无实体",
-    "DESCRIPTION": "将生命值变为一半。获得 !M! 层无实体。"
-  },
-  "${modID}:TestAttackBlock": {
-    "NAME": "测试攻防",
-    "DESCRIPTION": "获得 !B! 点格挡。造成 !D! 点伤害 2 次。",
-    "UPGRADE_DESCRIPTION": "获得 !B! 点格挡。造成 !D! 点伤害 2 次。"
-  },
-  "${modID}:TestMixed": {
-    "NAME": "测试混合",
-    "DESCRIPTION": "造成 !D! 点伤害。获得 !B! 点格挡。失去 1 点生命。"
-  },
-  "${modID}:TestHeavy": {
-    "NAME": "测试重击",
-    "DESCRIPTION": "造成 !D! 点伤害。获得 !M! 层无实体。"
-  },
-  "${modID}:TestA": {
-    "NAME": "测试A",
-    "DESCRIPTION": "造成 !D! 点伤害。",
-    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。"
-  },
-  "${modID}:TestB": {
-    "NAME": "测试B",
-    "DESCRIPTION": "获得 !B! 点格挡。",
-    "UPGRADE_DESCRIPTION": "获得 !B! 点格挡。"
-  },
-  "${modID}:TestC": {
-    "NAME": "测试C",
-    "DESCRIPTION": "造成 !D! 点伤害 2 次。",
-    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害 3 次。"
-  },
-  "${modID}:TestD": {
-    "NAME": "测试D",
-    "DESCRIPTION": "失去 1 点生命。抽 !M! 张牌。"
-  },
-  "${modID}:TestE": {
-    "NAME": "测试E",
-    "DESCRIPTION": "造成 !D! 点伤害。获得 !B! 点格挡。"
-  },
-  "${modID}:TestF": {
-    "NAME": "测试F",
-    "DESCRIPTION": "获得 !M! 层无实体。"
-  },
-  "${modID}:TestG": {
-    "NAME": "测试G",
-    "DESCRIPTION": "造成 !D! 点伤害。每回合失去 1 点生命。",
-    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。每回合失去 1 点生命。"
-  },
-  "${modID}:TestH": {
-    "NAME": "测试H",
-    "DESCRIPTION": "获得 !B! 点格挡。抽 1 张牌。"
-  },
-  "${modID}:TestI": {
-    "NAME": "测试I",
-    "DESCRIPTION": "将生命值变为一半。获得 !M! 层无实体。"
-  },
-  "${modID}:TestPowerA": {
-    "NAME": "测试能力A",
-    "DESCRIPTION": "每回合获得 !M! 点力量。",
-    "UPGRADE_DESCRIPTION": "每回合获得 !M! 点力量。"
-  },
-  "${modID}:TestPowerB": {
-    "NAME": "测试能力B",
-    "DESCRIPTION": "每回合获得 !M! 点格挡。",
-    "UPGRADE_DESCRIPTION": "每回合获得 !M! 点格挡。"
-  },
-  "${modID}:TestPowerC": {
-    "NAME": "测试能力C",
-    "DESCRIPTION": "每回合回复 !M! 点生命。",
-    "UPGRADE_DESCRIPTION": "每回合回复 !M! 点生命。"
-  },
   "${modID}:PushToCloud": {
     "NAME": "推送云端",
     "DESCRIPTION": "选择最多 2 张手牌上传到云端仓库。",
@@ -125,5 +36,103 @@
     "NAME": "拉取",
     "DESCRIPTION": "选择云端仓库中的一张牌加入手牌。",
     "UPGRADE_DESCRIPTION": "选择云端仓库中的一张牌加入手牌。 NL 加入时费用 -1。"
+  },
+  "${modID}:Firewall": {
+    "NAME": "防火墙",
+    "DESCRIPTION": "获得 !M! 层多层护甲。 NL 消耗 。 NL 被删除时：玩家的多层护甲翻倍。",
+    "UPGRADE_DESCRIPTION": "获得 !M! 层多层护甲。 NL 消耗 。 NL 被删除时：玩家的多层护甲翻倍。"
+  },
+  "${modID}:InternetSpirit": {
+    "NAME": "互联网精神",
+    "DESCRIPTION": "每回合多抽 1 张牌。"
+  },
+  "${modID}:Deadline": {
+    "NAME": "死线将至",
+    "DESCRIPTION": "随机上传 2 张手牌到云端仓库。",
+    "UPGRADE_DESCRIPTION": "保留。 NL 随机上传 2 张手牌到云端仓库。"
+  },
+  "${modID}:WorkFromHome": {
+    "NAME": "居家办公",
+    "DESCRIPTION": "消耗 1 层 WiFi。从云端仓库选择 1 张牌加入手牌。"
+  },
+  "${modID}:ScienceSurf": {
+    "NAME": "科学上网",
+    "DESCRIPTION": "抽 1 张牌。获得 !M! 层 WiFi。",
+    "UPGRADE_DESCRIPTION": "抽 1 张牌。获得 !M! 层 WiFi。"
+  },
+  "${modID}:TransactionIsolation": {
+    "NAME": "事务隔离",
+    "DESCRIPTION": "获得 !B! 点格挡。 NL 加入手牌时：抽 !M! 张牌。",
+    "UPGRADE_DESCRIPTION": "获得 !B! 点格挡。 NL 加入手牌时：抽 !M! 张牌。"
+  },
+  "${modID}:IndianDev": {
+    "NAME": "阿三程序员",
+    "DESCRIPTION": "从 3 张随机牌中选择 1 张上传到云端仓库。",
+    "UPGRADE_DESCRIPTION": "从 3 张随机牌中选择 1 张上传到云端仓库。"
+  },
+  "${modID}:DBDrop": {
+    "NAME": "删库跑路",
+    "DESCRIPTION": "删除仓库中所有牌。每删除 1 张，对所有敌人造成 !D! 点伤害。",
+    "UPGRADE_DESCRIPTION": "删除仓库中所有牌。每删除 1 张，对所有敌人造成 !D! 点伤害。"
+  },
+  "${modID}:OpenSource": {
+    "NAME": "开源协议",
+    "DESCRIPTION": "每当一张牌被上传到云端仓库，获得 1 点临时力量和 1 点临时敏捷。"
+  },
+  "${modID}:CodeReview": {
+    "NAME": "代码审查",
+    "DESCRIPTION": "抽 1 张牌。如果仓库中有同名牌，获得 [E] 。"
+  },
+  "${modID}:Hotfix": {
+    "NAME": "热修复",
+    "DESCRIPTION": "将弃牌堆最上面的 !M! 张牌上传到云端仓库。如果该牌是技能牌，抽 1 张牌。",
+    "UPGRADE_DESCRIPTION": "将弃牌堆最上面的 !M! 张牌上传到云端仓库。如果该牌是技能牌，抽 1 张牌。"
+  },
+  "${modID}:GarbageCollect": {
+    "NAME": "垃圾回收",
+    "DESCRIPTION": "删除仓库中所有牌。每删除 1 张，获得 !B! 点格挡。",
+    "UPGRADE_DESCRIPTION": "删除仓库中所有牌。每删除 1 张，获得 !B! 点格挡。"
+  },
+  "${modID}:EmergencyPatch": {
+    "NAME": "紧急补丁",
+    "DESCRIPTION": "获得 !B! 点格挡。 NL 加入手牌时：抽 1 张牌。",
+    "UPGRADE_DESCRIPTION": "获得 !B! 点格挡。 NL 加入手牌时：抽 1 张牌。"
+  },
+  "${modID}:PacketStorm": {
+    "NAME": "数据包风暴",
+    "DESCRIPTION": "造成 !D! 点伤害 × 当前 WiFi 层数。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害 × 当前 WiFi 层数。"
+  },
+  "${modID}:PortableRouter": {
+    "NAME": "便携路由器",
+    "DESCRIPTION": "获得 2 层 WiFi。 NL 被上传到云端仓库时：获得 1 层 WiFi。"
+  },
+  "${modID}:HackAttack": {
+    "NAME": "黑客入侵",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 被上传到云端仓库时：永久 +5 伤害。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 NL 被上传到云端仓库时：永久 +5 伤害。"
+  },
+  "${modID}:ResourceSched": {
+    "NAME": "资源调度",
+    "DESCRIPTION": "获得 [E] [E] 。 NL 每次加入手牌时：本场战斗费用 -1。",
+    "UPGRADE_DESCRIPTION": "获得 [E] [E] [E] 。 NL 每次加入手牌时：本场战斗费用 -1。"
+  },
+  "${modID}:IdleRecycle": {
+    "NAME": "闲置回收",
+    "DESCRIPTION": "获得 !B! 点格挡。 NL 被删除时：获得 [E] [E] [E] 。"
+  },
+  "${modID}:StorageReload": {
+    "NAME": "仓库重载",
+    "DESCRIPTION": "消耗所有手牌和 1 层 WiFi。仓库中所有牌加入手牌。",
+    "UPGRADE_DESCRIPTION": "消耗所有手牌和 1 层 WiFi。仓库中所有牌加入手牌。"
+  },
+  "${modID}:Ransomware": {
+    "NAME": "勒索攻击",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 加入手牌时：获得 [E] 。"
+  },
+  "${modID}:ScrumMaster": {
+    "NAME": "快速开发",
+    "DESCRIPTION": "抽 2 张牌。获得 [E] 。 NL 消耗 。被删除时：直接打出。",
+    "UPGRADE_DESCRIPTION": "抽 2 张牌。获得 [E] [E] 。 NL 消耗 。被删除时：直接打出。"
   }
 }

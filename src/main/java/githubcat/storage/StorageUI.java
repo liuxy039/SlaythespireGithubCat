@@ -1,5 +1,12 @@
 package githubcat.storage;
 
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.powers.PlatedArmorPower;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -31,14 +38,72 @@ public class StorageUI {
 
     public void addCard(AbstractCard card) {
         AbstractCard copy = card.makeStatEquivalentCopy();
+        if (AbstractDungeon.player != null) {
+            if (copy.cardID.equals(githubcat.cards.PortableRouter.ID)) {
+                com.megacrit.cardcrawl.dungeons.AbstractDungeon.actionManager.addToBottom(
+                    new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
+                        new githubcat.powers.WifiSignal(AbstractDungeon.player, 1), 1));
+            }
+            if (copy.cardID.equals(githubcat.cards.HackAttack.ID)) {
+                card.baseDamage += 5;
+                copy.baseDamage += 5;
+            }
+        }
         cards.add(0, copy);
         if (cards.size() > MAX_SIZE) {
             AbstractCard removed = cards.remove(cards.size() - 1);
+            onCardRemovedFromStorage(removed);
             removed.targetTransparency = 0f;
         }
     }
 
-    public void clear() { cards.clear(); }
+    public void clear() {
+        if (com.megacrit.cardcrawl.core.CardCrawlGame.isInARun() && AbstractDungeon.player != null) {
+            for (AbstractCard c : cards) {
+                onCardRemovedFromStorage(c);
+            }
+        }
+        cards.clear();
+    }
+
+    public static void onCardAddedToHand(AbstractCard card) {
+        if (card.cardID.equals(githubcat.cards.ResourceSched.ID)) {
+            if (card instanceof githubcat.cards.ResourceSched) {
+                ((githubcat.cards.ResourceSched) card).reduceCostForTurn();
+            }
+        }
+        if (card.cardID.equals(githubcat.cards.Ransomware.ID)) {
+            com.megacrit.cardcrawl.dungeons.AbstractDungeon.actionManager.addToBottom(
+                new GainEnergyAction(1));
+        }
+    }
+
+    private void onCardRemovedFromStorage(AbstractCard card) {
+        if (AbstractDungeon.player == null) return;
+        if (card.cardID.equals(githubcat.cards.Firewall.ID)) {
+            AbstractPower plated = AbstractDungeon.player.getPower(PlatedArmorPower.POWER_ID);
+            if (plated != null) {
+                int doubled = 2 * plated.amount;
+                AbstractDungeon.player.powers.remove(plated);
+                com.megacrit.cardcrawl.dungeons.AbstractDungeon.actionManager.addToBottom(
+                    new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
+                        new PlatedArmorPower(AbstractDungeon.player, doubled), doubled));
+            }
+        }
+        if (card.cardID.equals(githubcat.cards.ScrumMaster.ID)) {
+            com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDiscardEffect effect =
+                new com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDiscardEffect(
+                    card.makeSameInstanceOf(),
+                    com.megacrit.cardcrawl.core.Settings.WIDTH / 2f,
+                    com.megacrit.cardcrawl.core.Settings.HEIGHT / 2f);
+            com.megacrit.cardcrawl.dungeons.AbstractDungeon.effectList.add(effect);
+            com.megacrit.cardcrawl.dungeons.AbstractDungeon.actionManager.addToBottom(new DrawCardAction(2));
+            com.megacrit.cardcrawl.dungeons.AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(1));
+        }
+        if (card.cardID.equals(githubcat.cards.IdleRecycle.ID)) {
+            com.megacrit.cardcrawl.dungeons.AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(3));
+        }
+    }
 
     public ArrayList<AbstractCard> getCards() { return cards; }
 
@@ -93,11 +158,7 @@ public class StorageUI {
         float mx = InputHelper.mX;
         float my = InputHelper.mY;
         if (mx >= labelX && mx <= labelX + textW && my >= labelY - 20f * Settings.scale && my <= labelY + 10f * Settings.scale) {
-            boolean hasWifi = AbstractDungeon.player != null && AbstractDungeon.player.hasPower(WifiSignal.POWER_ID);
-            String tip = "云端仓库 - 复制手牌到云端，或从云端拉取到手上。 NL 仓库上限为 5，超出范围的卡牌会被删除。";
-            if (!hasWifi) {
-                tip += " NL 需要 WiFi 信号才能与仓库交互。";
-            }
+            String tip = "云端仓库 - 复制手牌到云端，或从云端拉取到手上。 NL 仓库上限为 5，超出范围的卡牌会被删除。 NL 新牌从左侧加入，超出时最右侧的牌被删除。 NL NL 需要 WiFi 信号才能与云端仓库交互。";
             TipHelper.renderGenericTip(labelX + textW + 20f * Settings.scale, labelY, "云端仓库", tip);
         }
 

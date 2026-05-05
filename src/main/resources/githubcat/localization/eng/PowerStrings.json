@@ -4,5 +4,11 @@
     "DESCRIPTIONS": [
       "每回合获得 #b1 层 #yWiFi信号 。"
     ]
+  },
+  "${modID}:InternetSpiritPower": {
+    "NAME": "互联网精神",
+    "DESCRIPTIONS": [
+      "每回合多抽 #b1 张牌。"
+    ]
   }
 }
