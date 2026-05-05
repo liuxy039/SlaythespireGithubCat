@@ -30,14 +30,18 @@ public class PushToCloud extends BaseCard {
         int count = magicNumber;
         if (AbstractDungeon.player.hand.size() == 0) return;
 
+        for (AbstractCard c : AbstractDungeon.player.hand.group) {
+            c.stopGlowing();
+        }
+
         used = false;
+        AbstractDungeon.gridSelectScreen.selectedCards.clear();
         AbstractDungeon.gridSelectScreen.open(
                 AbstractDungeon.player.hand,
                 count,
                 true,
                 "选择要上传到云端仓库的卡牌（最多 " + count + " 张）"
         );
-        AbstractDungeon.gridSelectScreen.selectedCards.clear();
     }
 
     @Override
