@@ -38,6 +38,8 @@ public class StorageUI {
 
     public void clear() { cards.clear(); }
 
+    public ArrayList<AbstractCard> getCards() { return cards; }
+
     public void update() {
         if (!CardCrawlGame.isInARun() || AbstractDungeon.player == null) { clear(); return; }
         if (AbstractDungeon.getCurrRoom() == null) return;

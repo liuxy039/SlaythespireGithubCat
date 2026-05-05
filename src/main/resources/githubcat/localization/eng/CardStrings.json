@@ -115,5 +115,15 @@
     "NAME": "测试能力C",
     "DESCRIPTION": "每回合回复 !M! 点生命。",
     "UPGRADE_DESCRIPTION": "每回合回复 !M! 点生命。"
+  },
+  "${modID}:PushToCloud": {
+    "NAME": "推送云端",
+    "DESCRIPTION": "选择最多 2 张手牌上传到云端仓库。",
+    "UPGRADE_DESCRIPTION": "选择最多 3 张手牌上传到云端仓库。"
+  },
+  "${modID}:PullFromCloud": {
+    "NAME": "拉取",
+    "DESCRIPTION": "选择云端仓库中的一张牌加入手牌。",
+    "UPGRADE_DESCRIPTION": "选择云端仓库中的一张牌加入手牌。 NL 加入时费用 -1。"
   }
 }

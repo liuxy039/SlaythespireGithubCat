@@ -195,6 +195,8 @@ public class BasicMod implements
         BaseMod.addCard(new githubcat.cards.TestPowerA());
         BaseMod.addCard(new githubcat.cards.TestPowerB());
         BaseMod.addCard(new githubcat.cards.TestPowerC());
+        BaseMod.addCard(new githubcat.cards.PushToCloud());
+        BaseMod.addCard(new githubcat.cards.PullFromCloud());
     }
 
     @Override

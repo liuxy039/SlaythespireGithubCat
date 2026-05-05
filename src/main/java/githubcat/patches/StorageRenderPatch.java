@@ -10,6 +10,8 @@ import githubcat.storage.StorageUI;
 
 public class StorageRenderPatch {
     public static StorageUI storageUI = new StorageUI();
+    private static boolean wasInCombat = false;
+    private static boolean clearedOnLoad = false;
 
     @SpirePatch(clz = AbstractDungeon.class, method = "update")
     public static class StorageUpdatePatch {
@@ -18,10 +20,31 @@ public class StorageRenderPatch {
             if (!CardCrawlGame.isInARun() || AbstractDungeon.player == null) {
                 storageUI.setHasRelic(false);
                 storageUI.clear();
+                wasInCombat = false;
+                clearedOnLoad = false;
                 return;
             }
+
+            if (!clearedOnLoad) {
+                storageUI.clear();
+                clearedOnLoad = true;
+            }
+
             boolean hasIt = AbstractDungeon.player.hasRelic(GitHubDesktop.ID);
             storageUI.setHasRelic(hasIt);
+
+            AbstractRoom room = AbstractDungeon.getCurrRoom();
+            if (room != null) {
+                boolean inCombat = room.phase == AbstractRoom.RoomPhase.COMBAT;
+                if (inCombat && !wasInCombat) {
+                    storageUI.clear();
+                }
+                wasInCombat = inCombat;
+                if (room.phase == AbstractRoom.RoomPhase.COMPLETE) {
+                    storageUI.clear();
+                }
+            }
+
             if (!hasIt) return;
             storageUI.update();
         }
