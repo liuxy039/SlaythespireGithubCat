@@ -79,7 +79,7 @@ public class StorageUI {
         if (cards.isEmpty()) return;
         if (AbstractDungeon.getCurrRoom() == null || AbstractDungeon.getCurrRoom().phase != AbstractRoom.RoomPhase.COMBAT) return;
 
-        FontHelper.renderFontLeft(sb, FontHelper.tipHeaderFont, "仓库",
+        FontHelper.renderFontLeft(sb, FontHelper.tipHeaderFont, "云端仓库",
                 AREA_LEFT, AREA_TOP + AbstractCard.IMG_HEIGHT * CARD_SCALE / 2f + 30f * Settings.scale,
                 Color.WHITE);
 
