@@ -2,7 +2,6 @@ package githubcat.storage;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -16,14 +15,17 @@ import java.util.ArrayList;
 public class StorageUI {
     private static final int MAX_SIZE = 5;
     private static final float CARD_SCALE = 0.6f;
-    private static final float CARD_GAP = AbstractCard.IMG_WIDTH * CARD_SCALE + 30f * Settings.scale;
-    private static final float AREA_WIDTH = MAX_SIZE * CARD_GAP + 20f * Settings.scale;
-    private static final float AREA_HEIGHT = AbstractCard.IMG_HEIGHT * CARD_SCALE + 60f * Settings.scale;
-    private static final float AREA_LEFT = Settings.WIDTH * 0.35f - AREA_WIDTH / 2f + 10f * Settings.scale;
     private static final float AREA_TOP = Settings.HEIGHT * 0.72f;
+    private static final float BASE_GAP = AbstractCard.IMG_WIDTH * CARD_SCALE + 20f * Settings.scale;
+    private static final float AREA_LEFT = Settings.WIDTH * 0.25f;
+    private static final float HOVER_SCALE = 0.9f;
+    private static final float HOVER_EXTRA_GAP = 50f * Settings.scale;
 
     private ArrayList<AbstractCard> cards = new ArrayList<>();
-    private AbstractCard hoveredCard = null;
+    private int hoveredIndex = -1;
+    private boolean hasRelic = false;
+
+    public void setHasRelic(boolean v) { hasRelic = v; }
 
     public void addCard(AbstractCard card) {
         AbstractCard copy = card.makeStatEquivalentCopy();
@@ -40,58 +42,86 @@ public class StorageUI {
 
     public void update() {
         if (!CardCrawlGame.isInARun() || AbstractDungeon.player == null) { clear(); return; }
-        if (AbstractDungeon.getCurrRoom() == null || AbstractDungeon.getCurrRoom().phase != AbstractRoom.RoomPhase.COMBAT) return;
+        if (AbstractDungeon.getCurrRoom() == null || AbstractDungeon.getCurrRoom().phase != AbstractRoom.RoomPhase.COMBAT) {
+            if (AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMPLETE) {
+                clear();
+            }
+            return;
+        }
 
         float mx = InputHelper.mX;
         float my = InputHelper.mY;
-        hoveredCard = null;
+
+        int prevHover = hoveredIndex;
+        hoveredIndex = -1;
 
         for (int i = 0; i < cards.size(); i++) {
-            AbstractCard c = cards.get(i);
-            float cx = AREA_LEFT + i * CARD_GAP + AbstractCard.IMG_WIDTH * CARD_SCALE / 2f;
+            float cx = getCardX(i);
             float cy = AREA_TOP;
 
+            AbstractCard c = cards.get(i);
             c.target_x = cx;
             c.target_y = cy;
             c.targetDrawScale = CARD_SCALE;
             c.targetTransparency = 1f;
 
-            float hbX = cx - AbstractCard.IMG_WIDTH * CARD_SCALE / 2f;
-            float hbY = cy - AbstractCard.IMG_HEIGHT * CARD_SCALE / 2f;
-            if (mx >= hbX && mx <= hbX + AbstractCard.IMG_WIDTH * CARD_SCALE
-                    && my >= hbY && my <= hbY + AbstractCard.IMG_HEIGHT * CARD_SCALE) {
-                hoveredCard = c;
-                c.targetDrawScale = 0.75f;
-                c.target_y = AREA_TOP + 80f * Settings.scale;
+            float halfW = AbstractCard.IMG_WIDTH * CARD_SCALE / 2f;
+            float halfH = AbstractCard.IMG_HEIGHT * CARD_SCALE / 2f;
+            if (mx >= cx - halfW && mx <= cx + halfW && my >= cy - halfH && my <= cy + halfH) {
+                hoveredIndex = i;
+                c.targetDrawScale = HOVER_SCALE;
             }
 
             c.update();
         }
     }
 
+    private float getCardX(int index) {
+        if (cards.isEmpty()) return AREA_LEFT;
+        int hov = hoveredIndex;
+        if (hov < 0) {
+            return AREA_LEFT + index * BASE_GAP + AbstractCard.IMG_WIDTH * CARD_SCALE / 2f;
+        }
+
+        float[] xs = new float[cards.size()];
+        float totalW = 0;
+        for (int i = 0; i < cards.size(); i++) {
+            float w = (i == hov) ? AbstractCard.IMG_WIDTH * HOVER_SCALE + HOVER_EXTRA_GAP
+                    : AbstractCard.IMG_WIDTH * CARD_SCALE;
+            xs[i] = w;
+            totalW += w;
+        }
+
+        totalW -= (hov >= 0 ? HOVER_EXTRA_GAP : 0);
+        float startX = AREA_LEFT + (BASE_GAP * (cards.size() - 1) + AbstractCard.IMG_WIDTH * CARD_SCALE - totalW) / 2f;
+
+        float cx = startX + xs[index] / 2f;
+        for (int i = 0; i < index; i++) {
+            cx += (i == 0 ? startX + xs[0] / 2f : xs[i]);
+        }
+        if (index == 0) return cx;
+
+        float prev = startX;
+        for (int i = 0; i < index; i++) {
+            prev += xs[i];
+        }
+        return prev + xs[index] / 2f;
+    }
+
     public void render(SpriteBatch sb) {
+        if (!hasRelic) return;
         if (!CardCrawlGame.isInARun() || AbstractDungeon.player == null) return;
         if (cards.isEmpty()) return;
         if (AbstractDungeon.getCurrRoom() == null || AbstractDungeon.getCurrRoom().phase != AbstractRoom.RoomPhase.COMBAT) return;
 
-        sb.end();
-        ShapeRenderer sr = new ShapeRenderer();
-        sr.setProjectionMatrix(sb.getProjectionMatrix().cpy());
-        sr.begin(ShapeRenderer.ShapeType.Line);
-        sr.setColor(new Color(0.5f, 0.5f, 0.8f, 0.8f));
-        sr.rect(AREA_LEFT - 10f * Settings.scale, AREA_TOP - AREA_HEIGHT / 2f, AREA_WIDTH, AREA_HEIGHT);
-        sr.end();
-        sr.dispose();
-        sb.begin();
-
         FontHelper.renderFontLeft(sb, FontHelper.tipHeaderFont, "仓库",
                 AREA_LEFT - 10f * Settings.scale,
-                AREA_TOP + AREA_HEIGHT / 2f + 20f * Settings.scale,
+                AREA_TOP + AbstractCard.IMG_HEIGHT * CARD_SCALE / 2f + 30f * Settings.scale,
                 Color.WHITE);
 
-        for (AbstractCard c : cards) {
-            if (c != hoveredCard) c.render(sb);
+        for (int i = 0; i < cards.size(); i++) {
+            if (i != hoveredIndex) cards.get(i).render(sb);
         }
-        if (hoveredCard != null) hoveredCard.render(sb);
+        if (hoveredIndex >= 0) cards.get(hoveredIndex).render(sb);
     }
 }
