@@ -1,6 +1,7 @@
 package githubcat;
 
 import basemod.BaseMod;
+import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import githubcat.character.MyCharacter;
 import githubcat.util.GeneralUtils;
@@ -36,7 +37,8 @@ public class BasicMod implements
         EditKeywordsSubscriber,
         AddAudioSubscriber,
         PostInitializeSubscriber,
-        basemod.interfaces.EditCardsSubscriber {
+        basemod.interfaces.EditCardsSubscriber,
+        basemod.interfaces.EditRelicsSubscriber {
     public static ModInfo info;
     public static String modID; //Edit your pom.xml to change this
     static { loadModInfo(); }
@@ -169,11 +171,41 @@ public class BasicMod implements
     public void receiveEditCards() {
         BaseMod.addCard(new githubcat.cards.Strike());
         BaseMod.addCard(new githubcat.cards.Defend());
+        BaseMod.addCard(new githubcat.cards.SelfHarm());
+        BaseMod.addCard(new githubcat.cards.Scratch());
+        BaseMod.addCard(new githubcat.cards.TailCut());
+        BaseMod.addCard(new githubcat.cards.GroundPose());
+        BaseMod.addCard(new githubcat.cards.TestStrike());
+        BaseMod.addCard(new githubcat.cards.TestBlock());
+        BaseMod.addCard(new githubcat.cards.TestDraw());
+        BaseMod.addCard(new githubcat.cards.TestSelfHarm());
+        BaseMod.addCard(new githubcat.cards.TestIntangible());
+        BaseMod.addCard(new githubcat.cards.TestAttackBlock());
+        BaseMod.addCard(new githubcat.cards.TestMixed());
+        BaseMod.addCard(new githubcat.cards.TestHeavy());
+        BaseMod.addCard(new githubcat.cards.TestA());
+        BaseMod.addCard(new githubcat.cards.TestB());
+        BaseMod.addCard(new githubcat.cards.TestC());
+        BaseMod.addCard(new githubcat.cards.TestD());
+        BaseMod.addCard(new githubcat.cards.TestE());
+        BaseMod.addCard(new githubcat.cards.TestF());
+        BaseMod.addCard(new githubcat.cards.TestG());
+        BaseMod.addCard(new githubcat.cards.TestH());
+        BaseMod.addCard(new githubcat.cards.TestI());
+        BaseMod.addCard(new githubcat.cards.TestPowerA());
+        BaseMod.addCard(new githubcat.cards.TestPowerB());
+        BaseMod.addCard(new githubcat.cards.TestPowerC());
     }
 
     @Override
     public void receiveAddAudio() {
         loadAudio(Sounds.class);
+    }
+
+    @Override
+    public void receiveEditRelics() {
+        BaseMod.addRelic(new githubcat.relics.GitHubDesktop(), RelicType.SHARED);
+        BaseMod.addRelic(new githubcat.relics.LittleClash(), RelicType.SHARED);
     }
 
     private static final String[] AUDIO_EXTENSIONS = { ".ogg", ".wav", ".mp3" }; //There are more valid types, but not really worth checking them all here

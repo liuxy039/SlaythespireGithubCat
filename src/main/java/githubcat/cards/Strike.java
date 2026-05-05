@@ -15,7 +15,7 @@ public class Strike extends BaseCard {
 
     public Strike() {
         super(ID, new CardStats(CARD_COLOR, CardType.ATTACK, CardRarity.BASIC, CardTarget.ENEMY, 1));
-        setDamage(6, 3);
+        setDamage(100, 0);
         tags.add(CardTags.STRIKE);
         tags.add(BaseModCardTags.BASIC_STRIKE);
     }

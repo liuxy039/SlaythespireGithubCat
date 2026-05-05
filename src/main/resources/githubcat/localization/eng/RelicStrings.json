@@ -1,9 +1,16 @@
 {
-  "${modID}:RelicID": {
-    "NAME": "Good Relic",
-    "FLAVOR": "Flavor text displayed in detailed relic view.",
+  "${modID}:GitHubDesktop": {
+    "NAME": "GitHubDesktop",
+    "FLAVOR": "你的代码托管伙伴。",
     "DESCRIPTIONS": [
-      "Gain [E] at the start of your turn. [E] is an energy icon."
+      "每回合恢复 1 点生命。战斗开始时，选择 3 张手牌复制到仓库。"
+    ]
+  },
+  "${modID}:LittleClash": {
+    "NAME": "小Clash",
+    "FLAVOR": "小小的冲突。",
+    "DESCRIPTIONS": [
+      "战斗结束时，回复 10 点生命。"
     ]
   }
 }

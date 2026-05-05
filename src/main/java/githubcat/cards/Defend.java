@@ -13,7 +13,7 @@ public class Defend extends BaseCard {
 
     public Defend() {
         super(ID, new CardStats(CARD_COLOR, CardType.SKILL, CardRarity.BASIC, CardTarget.SELF, 1));
-        setBlock(5, 3);
+        setBlock(100, 0);
         tags.add(BaseModCardTags.BASIC_DEFEND);
     }
 

@@ -1,12 +1,12 @@
 {
   "${modID}:CharacterID": {
     "NAMES": [
-      "Github猫咪，也许不是只猫咪...",
+      "Github猫",
       "GithubCat"
     ],
     "TEXT": [
-      "Line #1 of character select description. NL Line 2 of character select description.",
-      " NL Text displayed when smacking the heart. The next one is used for the Vampires event. Usually you just change the last bit.",
+      "一只从异世界来的猫，也许不是一只猫...",
+      "嗯....这只猫能打得过吗...？或者说这只小章鱼...",
       "Navigating an unlit street, you come across several hooded figures in the midst of some dark ritual. As you approach, they turn to you in eerie unison. The tallest among them bares fanged teeth and extends a long, pale hand towards you. NL ~\"Join~ ~us~ ~basic~ ~one,~ ~and~ ~feel~ ~the~ ~warmth~ ~of~ ~the~ ~Spire.\"~"
     ]
   }

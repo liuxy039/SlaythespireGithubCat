@@ -6,5 +6,114 @@
   "${modID}:Defend": {
     "NAME": "防御",
     "DESCRIPTION": "获得 !B! 点格挡。"
+  },
+  "${modID}:SelfHarm": {
+    "NAME": "自残",
+    "DESCRIPTION": "失去 1 点生命。抽 1 张牌。",
+    "UPGRADE_DESCRIPTION": "失去 1 点生命。抽 2 张牌。"
+  },
+  "${modID}:Scratch": {
+    "NAME": "爪击",
+    "DESCRIPTION": "造成 !D! 点伤害。自己受到造成伤害的一半的伤害。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。自己受到造成伤害的四分之一的伤害。"
+  },
+  "${modID}:TailCut": {
+    "NAME": "断尾",
+    "DESCRIPTION": "将生命值变为一半。获得 1 层无实体。",
+    "UPGRADE_DESCRIPTION": "将生命值变为一半。获得 2 层无实体。"
+  },
+  "${modID}:GroundPose": {
+    "NAME": "伏地姿态",
+    "DESCRIPTION": "获得 !B! 点格挡。造成 !D! 点伤害 2 次。",
+    "UPGRADE_DESCRIPTION": "获得 !B! 点格挡。造成 !D! 点伤害 2 次。"
+  },
+  "${modID}:TestStrike": {
+    "NAME": "测试打击",
+    "DESCRIPTION": "造成 !D! 点伤害。"
+  },
+  "${modID}:TestBlock": {
+    "NAME": "测试防御",
+    "DESCRIPTION": "获得 !B! 点格挡。"
+  },
+  "${modID}:TestDraw": {
+    "NAME": "测试抽牌",
+    "DESCRIPTION": "失去 1 点生命。抽 !M! 张牌。"
+  },
+  "${modID}:TestSelfHarm": {
+    "NAME": "测试自残",
+    "DESCRIPTION": "造成 !D! 点伤害。自己受到造成伤害的一半的伤害。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。自己受到造成伤害的四分之一的伤害。"
+  },
+  "${modID}:TestIntangible": {
+    "NAME": "测试无实体",
+    "DESCRIPTION": "将生命值变为一半。获得 !M! 层无实体。"
+  },
+  "${modID}:TestAttackBlock": {
+    "NAME": "测试攻防",
+    "DESCRIPTION": "获得 !B! 点格挡。造成 !D! 点伤害 2 次。",
+    "UPGRADE_DESCRIPTION": "获得 !B! 点格挡。造成 !D! 点伤害 2 次。"
+  },
+  "${modID}:TestMixed": {
+    "NAME": "测试混合",
+    "DESCRIPTION": "造成 !D! 点伤害。获得 !B! 点格挡。失去 1 点生命。"
+  },
+  "${modID}:TestHeavy": {
+    "NAME": "测试重击",
+    "DESCRIPTION": "造成 !D! 点伤害。获得 !M! 层无实体。"
+  },
+  "${modID}:TestA": {
+    "NAME": "测试A",
+    "DESCRIPTION": "造成 !D! 点伤害。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。"
+  },
+  "${modID}:TestB": {
+    "NAME": "测试B",
+    "DESCRIPTION": "获得 !B! 点格挡。",
+    "UPGRADE_DESCRIPTION": "获得 !B! 点格挡。"
+  },
+  "${modID}:TestC": {
+    "NAME": "测试C",
+    "DESCRIPTION": "造成 !D! 点伤害 2 次。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害 3 次。"
+  },
+  "${modID}:TestD": {
+    "NAME": "测试D",
+    "DESCRIPTION": "失去 1 点生命。抽 !M! 张牌。"
+  },
+  "${modID}:TestE": {
+    "NAME": "测试E",
+    "DESCRIPTION": "造成 !D! 点伤害。获得 !B! 点格挡。"
+  },
+  "${modID}:TestF": {
+    "NAME": "测试F",
+    "DESCRIPTION": "获得 !M! 层无实体。"
+  },
+  "${modID}:TestG": {
+    "NAME": "测试G",
+    "DESCRIPTION": "造成 !D! 点伤害。每回合失去 1 点生命。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。每回合失去 1 点生命。"
+  },
+  "${modID}:TestH": {
+    "NAME": "测试H",
+    "DESCRIPTION": "获得 !B! 点格挡。抽 1 张牌。"
+  },
+  "${modID}:TestI": {
+    "NAME": "测试I",
+    "DESCRIPTION": "将生命值变为一半。获得 !M! 层无实体。"
+  },
+  "${modID}:TestPowerA": {
+    "NAME": "测试能力A",
+    "DESCRIPTION": "每回合获得 !M! 点力量。",
+    "UPGRADE_DESCRIPTION": "每回合获得 !M! 点力量。"
+  },
+  "${modID}:TestPowerB": {
+    "NAME": "测试能力B",
+    "DESCRIPTION": "每回合获得 !M! 点格挡。",
+    "UPGRADE_DESCRIPTION": "每回合获得 !M! 点格挡。"
+  },
+  "${modID}:TestPowerC": {
+    "NAME": "测试能力C",
+    "DESCRIPTION": "每回合回复 !M! 点生命。",
+    "UPGRADE_DESCRIPTION": "每回合回复 !M! 点生命。"
   }
 }
