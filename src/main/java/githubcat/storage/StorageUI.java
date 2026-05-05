@@ -7,8 +7,10 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import githubcat.powers.WifiSignal;
 
 import java.util.ArrayList;
 
@@ -81,9 +83,23 @@ public class StorageUI {
         if (cards.isEmpty()) return;
         if (AbstractDungeon.getCurrRoom() == null || AbstractDungeon.getCurrRoom().phase != AbstractRoom.RoomPhase.COMBAT) return;
 
+        float labelX = AREA_LEFT;
+        float labelY = AREA_TOP + AbstractCard.IMG_HEIGHT * CARD_SCALE / 2f + 30f * Settings.scale;
+
         FontHelper.renderFontLeft(sb, FontHelper.tipHeaderFont, "云端仓库",
-                AREA_LEFT, AREA_TOP + AbstractCard.IMG_HEIGHT * CARD_SCALE / 2f + 30f * Settings.scale,
-                Color.WHITE);
+                labelX, labelY, Color.WHITE);
+
+        float textW = FontHelper.getWidth(FontHelper.tipHeaderFont, "云端仓库", 1f);
+        float mx = InputHelper.mX;
+        float my = InputHelper.mY;
+        if (mx >= labelX && mx <= labelX + textW && my >= labelY - 20f * Settings.scale && my <= labelY + 10f * Settings.scale) {
+            boolean hasWifi = AbstractDungeon.player != null && AbstractDungeon.player.hasPower(WifiSignal.POWER_ID);
+            String tip = "云端仓库 - 复制手牌到云端，或从云端拉取到手上。 NL 仓库上限为 5，超出范围的卡牌会被删除。";
+            if (!hasWifi) {
+                tip += " NL 需要 WiFi 信号才能与仓库交互。";
+            }
+            TipHelper.renderGenericTip(labelX + textW + 20f * Settings.scale, labelY, "云端仓库", tip);
+        }
 
         for (int i = 0; i < cards.size(); i++) {
             if (i != hoveredIndex) cards.get(i).render(sb);

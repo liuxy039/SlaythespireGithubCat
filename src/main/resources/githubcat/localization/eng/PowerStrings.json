@@ -1,8 +1,8 @@
 {
-  "${modID}:PowerID": {
-    "NAME": "Ultimate Power",
+  "${modID}:WifiSignal": {
+    "NAME": "WiFi信号",
     "DESCRIPTIONS": [
-      "You are Very Cool and Strong."
+      "每回合获得 #b1 层 #yWiFi信号 。"
     ]
   }
 }

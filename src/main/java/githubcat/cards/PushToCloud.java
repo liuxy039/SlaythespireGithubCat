@@ -27,6 +27,8 @@ public class PushToCloud extends BaseCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        if (!p.hasPower(githubcat.powers.WifiSignal.POWER_ID)) return;
+
         int count = magicNumber;
         if (AbstractDungeon.player.hand.size() == 0) return;
 

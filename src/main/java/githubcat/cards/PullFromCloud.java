@@ -19,12 +19,14 @@ public class PullFromCloud extends CustomCard {
     public PullFromCloud() {
         super(ID, cardStrings.NAME, "githubcat/images/cards/skill/default.png",
                 0, cardStrings.DESCRIPTION,
-                CardType.SKILL, com.megacrit.cardcrawl.cards.AbstractCard.CardColor.COLORLESS,
+                CardType.SKILL, githubcat.character.MyCharacter.Meta.CARD_COLOR,
                 CardRarity.UNCOMMON, CloudCardTargetEnum.CloudStorageCard);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        if (!p.hasPower(githubcat.powers.WifiSignal.POWER_ID)) return;
+
         AbstractCard targeted = CloudStorageTargetHandler.getTarget(this);
         if (targeted == null) return;
 
