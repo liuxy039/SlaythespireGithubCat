@@ -45,6 +45,13 @@ public class UploadToStorageAction extends AbstractGameAction {
                     true,
                     "选择要上传到仓库的卡牌"
             );
+            for (AbstractCard c : AbstractDungeon.player.hand.group) {
+                c.stopGlowing();
+            }
+        } else {
+            for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
+                c.beginGlowing();
+            }
         }
     }
 }
